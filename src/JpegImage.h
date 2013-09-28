@@ -2,7 +2,16 @@
 #define JPEGIMAGE_H
 
 
+#include <itkJPEGImageIO.h>
 #include "BaseImage.h"
+
+
+typedef itk::Image<unsigned char, D2>                       JPEGImageType;
+typedef itk::JPEGImageIO                                    JPEGIOType;
+typedef itk::ImageFileReader<JPEGImageType>                 JPEGReadType;
+typedef itk::ImageFileWriter<JPEGImageType>                 JPEGWriteType;
+typedef itk::ImageRegionConstIterator<JPEGImageType>        JPEGConstIteratorType;
+typedef itk::ImageRegionIterator<JPEGImageType>             JPEGIteratorType;
 
 
 class JpegImage : public BaseImage

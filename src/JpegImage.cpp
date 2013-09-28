@@ -14,8 +14,6 @@ JpegImage::JpegImage(int width, int height)
     JPEGImageType::RegionType region;
     index[0] = 0;
     index[1] = 0;
-    size[0] = 0;
-    size[1] = 0;
     size[0] = m_lWidth;
     size[1] = m_lHeight;
     region.SetSize(size);

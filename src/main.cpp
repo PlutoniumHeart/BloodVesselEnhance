@@ -1,6 +1,7 @@
 #include "DicomSlice.h"
 #include "PngImage.h"
 #include "JpegImage.h"
+#include "JpegSeries.h"
 
 
 int main()
@@ -31,5 +32,13 @@ int main()
     delete pEmptyDicom;
     delete pEmptyPng;
     delete pEmptyJpeg;
+
+
+    JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
+    pJpegSeries->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
+
+    delete pJpegSeries;
+
+
     return 0;
 }

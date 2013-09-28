@@ -20,9 +20,11 @@ else(CUDA_FOUND)
 endif(CUDA_FOUND)
 
 set(SOURCES src/main.cpp src/BaseImage.h src/BaseImage.cpp
+            src/BaseImageSeries.h src/BaseImageSeries.cpp
             src/DicomSlice.h src/DicomSlice.cpp
             src/PngImage.h src/PngImage.cpp
             src/JpegImage.h src/JpegImage.cpp
+            src/JpegSeries.h src/JpegSeries.cpp
 )
 
 set(ALL_LIBS ${ITK_LIBRARIES} ${CUDA_LIBRARIES})

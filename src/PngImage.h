@@ -2,7 +2,16 @@
 #define PNGIMAGE_H
 
 
+#include <itkPNGImageIO.h>
 #include "BaseImage.h"
+
+
+typedef itk::Image<unsigned char, D2>                       PNGImageType;
+typedef itk::PNGImageIO                                     PNGIOType;
+typedef itk::ImageFileReader<PNGImageType>                  PNGReadType;
+typedef itk::ImageFileWriter<PNGImageType>                  PNGWriteType;
+typedef itk::ImageRegionConstIterator<PNGImageType>         PNGConstIteratorType;
+typedef itk::ImageRegionIterator<PNGImageType>              PNGIteratorType;
 
 
 class PngImage : public BaseImage
