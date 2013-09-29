@@ -3,34 +3,12 @@
 
 BaseImageSeries::BaseImageSeries()
     : m_lDepth(0)
-    , m_sPixelData3D(NULL)
-    , m_cPixelData3D(NULL)
 {
 }
 
 
 BaseImageSeries::~BaseImageSeries()
 {
-    if(m_sPixelData3D!=NULL)
-    {
-        delete [] m_sPixelData3D;
-    }
-    if(m_cPixelData3D!=NULL)
-    {
-        delete [] m_cPixelData3D;
-    }
-}
-
-
-short* BaseImageSeries::GetShortPixelData()
-{
-    return m_sPixelData3D;
-}
-
-
-unsigned char* BaseImageSeries::GetUnsignedCharPixelData()
-{
-    return m_cPixelData3D;
 }
 
 
@@ -48,17 +26,17 @@ int BaseImageSeries::CastShortToUnsignedChar(BaseImageSeries* output, int window
     {
         for(i=0;i<m_lWidth*m_lHeight*m_lDepth;i++)
         {
-            if(m_sPixelData3D[i]>=window_pos+window_half_size)
+            if(m_sPixelData[i]>=window_pos+window_half_size)
             {
                 output->GetUnsignedCharPixelData()[i] = 255;
             }
-            else if(m_sPixelData3D[i]<=window_pos-window_half_size)
+            else if(m_sPixelData[i]<=window_pos-window_half_size)
             {
                 output->GetUnsignedCharPixelData()[i] = 0;
             }
             else
             {
-                output->GetUnsignedCharPixelData()[i] = 255*(m_sPixelData3D[i]-window_pos-window_half_size-1)/(2.0*window_half_size);
+                output->GetUnsignedCharPixelData()[i] = 255*(m_sPixelData[i]-window_pos-window_half_size-1)/(2.0*window_half_size);
             }
         }
     }
@@ -80,7 +58,7 @@ int BaseImageSeries::CastUnsignedCharToShort(BaseImageSeries* output)
     {
         for(i=0;i<m_lWidth*m_lHeight*m_lDepth;i++)
         {
-            output->GetShortPixelData()[i] = m_cPixelData3D[i];
+            output->GetShortPixelData()[i] = m_cPixelData[i];
         }
     }
     else

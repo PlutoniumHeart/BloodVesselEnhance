@@ -2,6 +2,7 @@
 #include "PngImage.h"
 #include "JpegImage.h"
 #include "JpegSeries.h"
+#include "PngSeries.h"
 
 
 int main()
@@ -35,10 +36,13 @@ int main()
 
 
     JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
+    PngSeries* pPngSeries = new PngSeries("../data/3d_png/", "%03d.png", 1, 10);
+
     pJpegSeries->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
+    pPngSeries->WritePngSeries("../data/output/3Dpng/", "%03d.png", 1, 10);
 
     delete pJpegSeries;
-
+    delete pPngSeries;
 
     return 0;
 }

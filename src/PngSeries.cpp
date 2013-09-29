@@ -1,18 +1,18 @@
-#include "JpegSeries.h"
+#include "PngSeries.h"
 
 
-JpegSeries::JpegSeries(int width, int height, int depth)
+PngSeries::PngSeries(int width, int height, int depth)
 {
     m_lWidth = width;
     m_lHeight = height;
     m_lDepth = depth;
 
-    m_pJpegIO = JPEGIOType::New();
+    m_pPngIO = PNGIOType::New();
 
-    m_ImageObject = JPEGSeriesType::New();
-    JPEGSeriesType::IndexType index;
-    JPEGSeriesType::SizeType size;
-    JPEGSeriesType::RegionType region;
+    m_ImageObject = PNGSeriesType::New();
+    PNGSeriesType::IndexType index;
+    PNGSeriesType::SizeType size;
+    PNGSeriesType::RegionType region;
     index[0] = 0;
     index[1] = 0;
     index[2] = 0;
@@ -26,26 +26,26 @@ JpegSeries::JpegSeries(int width, int height, int depth)
     m_ImageObject->FillBuffer(0);
 
     m_cPixelData = new unsigned char[m_lWidth*m_lHeight*m_lDepth];
-    Reshape321<JPEGSeriesType::Pointer, unsigned char, JPEGSeriesConstIteratorType>(m_ImageObject, m_cPixelData);
+    Reshape321<PNGSeriesType::Pointer, unsigned char, PNGSeriesConstIteratorType>(m_ImageObject, m_cPixelData);
 }
 
 
-JpegSeries::JpegSeries(std::string folderName, std::string seriesFormat, int begin, int end)
+PngSeries::PngSeries(std::string folderName, std::string seriesFormat, int begin, int end)
 {
-    m_pJpegIO = JPEGIOType::New();
-    m_ImageObject = JPEGSeriesType::New();
-    ReadJpegSeries(folderName, seriesFormat, begin, end);
+    m_pPngIO = PNGIOType::New();
+    m_ImageObject = PNGSeriesType::New();
+    ReadPngSeries(folderName, seriesFormat, begin, end);
 }
 
 
-JpegSeries::~JpegSeries()
+PngSeries::~PngSeries()
 {
 }
 
 
-int JpegSeries::ReadJpegSeries(std::string folderName, std::string seriesFormat, int begin, int end)
+int PngSeries::ReadPngSeries(std::string folderName, std::string seriesFormat, int begin, int end)
 {
-    JPEGSeriesReadType::Pointer reader = JPEGSeriesReadType::New();
+    PNGSeriesReadType::Pointer reader = PNGSeriesReadType::New();
     SeriesNameGeneratorType::Pointer nameGenerator = SeriesNameGeneratorType::New();
 
     nameGenerator->SetSeriesFormat(folderName+seriesFormat);
@@ -53,7 +53,7 @@ int JpegSeries::ReadJpegSeries(std::string folderName, std::string seriesFormat,
     nameGenerator->SetEndIndex(end);
     nameGenerator->SetIncrementIndex(1);
 
-    reader->SetImageIO(m_pJpegIO);
+    reader->SetImageIO(m_pPngIO);
     reader->SetFileNames(nameGenerator->GetFileNames());
     try
     {
@@ -70,14 +70,14 @@ int JpegSeries::ReadJpegSeries(std::string folderName, std::string seriesFormat,
     m_lHeight = tmp.GetElement(1);
     m_lDepth = tmp.GetElement(2);
     m_cPixelData = new unsigned char[m_lWidth*m_lHeight*m_lDepth];
-    Reshape321<JPEGSeriesType::Pointer, unsigned char, JPEGSeriesConstIteratorType>(m_ImageObject, m_cPixelData);
+    Reshape321<PNGSeriesType::Pointer, unsigned char, PNGSeriesConstIteratorType>(m_ImageObject, m_cPixelData);
     return 0;
 }
 
 
-int JpegSeries::WriteJpegSeries(std::string folderName, std::string seriesFormat, int begin, int end)
+int PngSeries::WritePngSeries(std::string folderName, std::string seriesFormat, int begin, int end)
 {
-    JPEGSeriesWriteType::Pointer writer = JPEGSeriesWriteType::New();
+    PNGSeriesWriteType::Pointer writer = PNGSeriesWriteType::New();
     SeriesNameGeneratorType::Pointer nameGenerator = SeriesNameGeneratorType::New();
 
     nameGenerator->SetSeriesFormat(folderName+seriesFormat);
@@ -100,13 +100,13 @@ int JpegSeries::WriteJpegSeries(std::string folderName, std::string seriesFormat
 }
 
 
-void JpegSeries::Update()
+void PngSeries::Update()
 {
-    Reshape123<JPEGSeriesType::Pointer, unsigned char, JPEGSeriesIteratorType>(m_cPixelData, m_ImageObject);
+    Reshape123<PNGSeriesType::Pointer, unsigned char, PNGSeriesIteratorType>(m_cPixelData, m_ImageObject);
 }
 
 
-JPEGSeriesType::Pointer JpegSeries::GetImageObject()
+PNGSeriesType::Pointer PngSeries::GetImageObject()
 {
     return m_ImageObject;
 }
