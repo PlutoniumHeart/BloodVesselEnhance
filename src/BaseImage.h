@@ -18,7 +18,7 @@ class BaseImage
 {
 public:
     BaseImage();
-    ~BaseImage();
+    virtual ~BaseImage();
 
     virtual short* GetShortPixelData();
     virtual unsigned char* GetUnsignedCharPixelData();

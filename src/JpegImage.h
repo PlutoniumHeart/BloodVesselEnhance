@@ -19,7 +19,7 @@ class JpegImage : public BaseImage
 public:
     JpegImage(int width, int height);
     JpegImage(std::string fileName);
-    ~JpegImage();
+    virtual ~JpegImage();
 
     int ReadJpegFile(std::string inputFile);
     int WriteJpegFile(std::string outputFile);

@@ -22,7 +22,7 @@ class DicomSlice : public BaseImage
 public:
     DicomSlice(int width, int height);
     DicomSlice(std::string fileName);
-    ~DicomSlice();
+    virtual ~DicomSlice();
 
     int ReadDicomFile(std::string inputFile);
     int WriteDicomFile(std::string outputFile);

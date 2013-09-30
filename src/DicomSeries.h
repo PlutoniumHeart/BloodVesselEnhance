@@ -21,7 +21,7 @@ class DicomSeries : public BaseImageSeries
 public:
     DicomSeries(int width, int height, int depth);
     DicomSeries(std::string folderName, int seriesNumber);
-    ~DicomSeries();
+    virtual ~DicomSeries();
 
     virtual void Update();
     int ReadDicomSeries(std::string folderName, std::string seriesUID);

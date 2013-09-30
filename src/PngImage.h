@@ -19,7 +19,7 @@ class PngImage : public BaseImage
 public:
     PngImage(int width, int height);
     PngImage(std::string fileName);
-    ~PngImage();
+    virtual ~PngImage();
 
     int ReadPngFile(std::string inputFile);
     int WritePngFile(std::string outputFile);

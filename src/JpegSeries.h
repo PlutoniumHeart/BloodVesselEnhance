@@ -18,7 +18,7 @@ class JpegSeries : public BaseImageSeries
 public:
     JpegSeries(int width, int height, int depth);
     JpegSeries(std::string folderName, std::string seriesFormat, int begin, int end);
-    ~JpegSeries();
+    virtual ~JpegSeries();
 
     virtual void Update();
     int ReadJpegSeries(std::string folderName, std::string seriesFormat, int begin, int end);

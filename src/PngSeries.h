@@ -18,7 +18,7 @@ class PngSeries : public BaseImageSeries
 public:
     PngSeries(int width, int height, int depth);
     PngSeries(std::string folderName, std::string seriesFormat, int begin, int end);
-    ~PngSeries();
+    virtual ~PngSeries();
 
     virtual void Update();
     int ReadPngSeries(std::string folderName, std::string seriesFormat, int begin, int end);

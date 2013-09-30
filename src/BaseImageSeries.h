@@ -19,7 +19,7 @@ class BaseImageSeries : public BaseImage
 {
 public:
     BaseImageSeries();
-    ~BaseImageSeries();
+    virtual ~BaseImageSeries();
 
     unsigned long GetImageDepth();
     virtual int CastShortToUnsignedChar(BaseImageSeries* output, int window_pos, int window_half_size);
