@@ -365,6 +365,8 @@ bool Matrix::SetElement(int row, int col, double value)
     }
 
     m_pdData[col+row*m_iColumns] = value;
+
+    return true;
 }
 
 
