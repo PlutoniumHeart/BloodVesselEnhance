@@ -63,11 +63,11 @@ int main()
     delete pJpegEmpty;*/
 
     std::fstream file;
-    PngSeries* pPngSeries = new PngSeries("../data/3d_png/", "%03d.png", 1, 10);
+    JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
     StructureClassify* pStructureClassify = new StructureClassify();
 
-    pStructureClassify->Histogram(pPngSeries);
-    file.open("../data/output/histogram.txt", std::ios::out);
+    pStructureClassify->Histogram(pJpegSeries);
+    /*file.open("../data/output/histogram.txt", std::ios::out);
     if(file.is_open())
     {
         for(int i=0;i<UCHAR_MAX;i++)
@@ -80,9 +80,9 @@ int main()
         std::cerr<<"Failed to open file."<<std::endl;
         return -1;
     }
-    file.close();
+    file.close();*/
 
-    delete pPngSeries;
+    delete pJpegSeries;
     delete pStructureClassify;
     return 0;
 }
