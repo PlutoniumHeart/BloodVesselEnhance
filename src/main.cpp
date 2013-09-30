@@ -36,17 +36,22 @@ int main()
     delete pEmptyJpeg;*/
 
 
-    JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
-    PngSeries* pPngSeries = new PngSeries("../data/3d_png/", "%03d.png", 1, 10);
+    //JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
+    //PngSeries* pPngSeries = new PngSeries("../data/3d_png/", "%03d.png", 1, 10);
     DicomSeries* pDicomSeries = new DicomSeries("../data/AX_RADIAL_PRE_0007/", 0);
+    JpegSeries* pJpegEmpty = new JpegSeries(320, 320, 96);
 
-    pJpegSeries->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
-    pPngSeries->WritePngSeries("../data/output/3Dpng/", "%03d.png", 1, 10);
+    //pJpegSeries->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
+    //pPngSeries->WritePngSeries("../data/output/3Dpng/", "%03d.png", 1, 10);
     pDicomSeries->WriteDicomSeries("../data/output/3Ddicom/");
 
-    delete pJpegSeries;
-    delete pPngSeries;
+    pDicomSeries->CastShortToUnsignedChar(pJpegEmpty, 72, 102);
+    pJpegEmpty->WriteJpegSeries("../data/output/3DJpeg/", "%03d.jpg", 1, 96);
+
+    //delete pJpegSeries;
+    //delete pPngSeries;
     delete pDicomSeries;
+    delete pJpegEmpty;
 
     return 0;
 }

@@ -121,7 +121,12 @@ int DicomSeries::ReadDicomSeries(std::string folderName, std::string seriesName)
     region = seriesReader->GetOutput()->GetLargestPossibleRegion();
     size = region.GetSize();
     m_ImageObject = seriesReader->GetOutput();
-
+    ImageRegion3D::SizeType tmp = m_ImageObject->GetLargestPossibleRegion().GetSize();
+    m_lWidth = tmp.GetElement(0);
+    m_lHeight = tmp.GetElement(1);
+    m_lDepth = tmp.GetElement(2);
+    m_sPixelData = new short[m_lWidth*m_lHeight*m_lDepth];
+    Reshape321<DICOMSeriesType::Pointer, short, DICOMSeriesConstIteratorType>(m_ImageObject, m_sPixelData);
     return 0;
 }
 
