@@ -22,6 +22,7 @@ endif(CUDA_FOUND)
 set(SOURCES src/main.cpp src/BaseImage.h src/BaseImage.cpp
             src/BaseImageSeries.h src/BaseImageSeries.cpp
             src/DicomSlice.h src/DicomSlice.cpp
+            src/DicomSeries.h src/DicomSeries.cpp
             src/PngImage.h src/PngImage.cpp
             src/PngSeries.h src/PngSeries.cpp
             src/JpegImage.h src/JpegImage.cpp
