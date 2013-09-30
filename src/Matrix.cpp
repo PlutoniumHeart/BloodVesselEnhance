@@ -42,6 +42,9 @@ Matrix::Matrix(const Matrix& other)
 }
 
 
+/* ===========================================================================================
+// Matrix destructor
+============================================================================================*/
 Matrix::~Matrix()
 {
     if(m_pdData != NULL)
@@ -85,6 +88,9 @@ bool Matrix::Init(int row, int col)
 }
 
 
+/* ===========================================================================================
+// Jocobi method for calculating eigen values of a real symmetrix matrix
+============================================================================================*/
 bool Matrix::JacobiEigenv(double* dblEigenValue, Matrix& mtxEigenVector, int nMaxIt, double eps)
 {
     int i = 0, j = 0, p = 0, q = 0, u = 0, w = 0, t = 0, s = 0, l = 0;
@@ -207,6 +213,9 @@ bool Matrix::JacobiEigenv(double* dblEigenValue, Matrix& mtxEigenVector, int nMa
 }
 
 
+/* ===========================================================================================
+// Operator '=' overload
+============================================================================================*/
 Matrix& Matrix::operator=(const Matrix& other)
 {
     if(&other!=this)
@@ -221,6 +230,9 @@ Matrix& Matrix::operator=(const Matrix& other)
 }
 
 
+/* ===========================================================================================
+// Operator '==' overload
+============================================================================================*/
 bool Matrix::operator==(const Matrix& other) const
 {
     int i = 0, j = 0;
@@ -245,12 +257,18 @@ bool Matrix::operator==(const Matrix& other) const
 }
 
 
+/* ===========================================================================================
+// Operator '!=' overload
+============================================================================================*/
 bool Matrix::operator!=(const Matrix& other) const
 {
     return !(*this == other);
 }
 
 
+/* ===========================================================================================
+// Operator '+' overload
+============================================================================================*/
 Matrix Matrix::operator+(const Matrix& other) const
 {
     int i = 0, j = 0;
@@ -271,6 +289,9 @@ Matrix Matrix::operator+(const Matrix& other) const
 }
 
 
+/* ===========================================================================================
+// Operator '-' overload
+============================================================================================*/
 Matrix Matrix::operator-(const Matrix& other) const
 {
     int i = 0, j = 0;
@@ -291,6 +312,9 @@ Matrix Matrix::operator-(const Matrix& other) const
 }
 
 
+/* ===========================================================================================
+// Operator '*' overload (Scalar multiplication)
+============================================================================================*/
 Matrix Matrix::operator*(double value) const
 {
     int i = 0, j = 0;
@@ -308,6 +332,9 @@ Matrix Matrix::operator*(double value) const
 }
 
 
+/* ===========================================================================================
+// Operator '=' overload (Matrix multiplication)
+============================================================================================*/
 Matrix Matrix::operator*(const Matrix& other) const
 {
     assert(m_iColumns == other.GetRows());
@@ -352,6 +379,9 @@ double* Matrix::GetData() const
 }
 
 
+/* ===========================================================================================
+// Set matrix element
+============================================================================================*/
 bool Matrix::SetElement(int row, int col, double value)
 {
     if(col<0 || col>=m_iColumns || row<0 || row>=m_iRows)
@@ -370,6 +400,9 @@ bool Matrix::SetElement(int row, int col, double value)
 }
 
 
+/* ===========================================================================================
+// Get matrix element
+============================================================================================*/
 double Matrix::GetElement(int row, int col) const
 {
     if(col<0 || col>=m_iColumns || row<0 || row>=m_iRows)
@@ -386,12 +419,18 @@ double Matrix::GetElement(int row, int col) const
 }
 
 
+/* ===========================================================================================
+// Get matrix column number
+============================================================================================*/
 int Matrix::GetColumns() const
 {
     return m_iColumns;
 }
 
 
+/* ===========================================================================================
+// Get matrix row number
+============================================================================================*/
 int Matrix::GetRows() const
 {
     return m_iRows;
