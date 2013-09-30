@@ -27,6 +27,21 @@ Matrix::Matrix(int row, int col)
 }
 
 
+/* ===========================================================================================
+// Matrix copy constructor
+============================================================================================*/
+Matrix::Matrix(const Matrix& other)
+    : m_iColumns(other.GetColumns())
+    , m_iRows(other.GetRows())
+    , m_pdData(NULL)
+{
+    bool bSuccess = Init(m_iRows, m_iColumns);
+    assert(bSuccess);
+
+    memcpy(m_pdData, other.m_pdData, sizeof(double)*m_iColumns*m_iRows);
+}
+
+
 Matrix::~Matrix()
 {
     if(m_pdData != NULL)
@@ -192,6 +207,142 @@ bool Matrix::JacobiEigenv(double* dblEigenValue, Matrix& mtxEigenVector, int nMa
 }
 
 
+Matrix& Matrix::operator=(const Matrix& other)
+{
+    if(&other!=this)
+    {
+        bool bSuccess = Init(other.GetRows(), other.GetColumns());
+        assert(bSuccess);
+
+        memcpy(m_pdData, other.m_pdData, sizeof(double)*m_iColumns*m_iRows);
+    }
+
+    return *this;
+}
+
+
+bool Matrix::operator==(const Matrix& other) const
+{
+    int i = 0, j = 0;
+    if(m_iColumns!=other.GetColumns() ||
+       m_iRows!=other.GetRows())
+    {
+        return false;
+    }
+
+    for(i=0;i<m_iRows;++i)
+    {
+        for(j=0;j<m_iColumns;++j)
+        {
+            if(GetElement(i, j) != other.GetElement(i, j))
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+
+bool Matrix::operator!=(const Matrix& other) const
+{
+    return !(*this == other);
+}
+
+
+Matrix Matrix::operator+(const Matrix& other) const
+{
+    int i = 0, j = 0;
+    assert(m_iColumns == other.GetColumns() &&
+           m_iRows == other.GetRows());
+
+    Matrix result(*this);
+
+    for(i=0;i<m_iRows;++i)
+    {
+        for(j=0;j<m_iColumns;++j)
+        {
+            result.SetElement(i, j, result.GetElement(i,j) + other.GetElement(i,j));
+        }
+    }
+
+    return result;
+}
+
+
+Matrix Matrix::operator-(const Matrix& other) const
+{
+    int i = 0, j = 0;
+    assert(m_iColumns == other.GetColumns() &&
+           m_iRows == other.GetRows());
+
+    Matrix result(*this);
+
+    for(i=0;i<m_iRows;++i)
+    {
+        for(j=0;j<m_iColumns;++j)
+        {
+            result.SetElement(i, j, result.GetElement(i, j) - other.GetElement(i, j));
+        }
+    }
+
+    return result;
+}
+
+
+Matrix Matrix::operator*(double value) const
+{
+    int i = 0, j = 0;
+    Matrix result(*this);
+
+    for(i=0;i<m_iRows;++i)
+    {
+        for(j=0;j<m_iColumns;++j)
+        {
+            result.SetElement(i, j, result.GetElement(i, j)*value);
+        }
+    }
+
+    return result;
+}
+
+
+Matrix Matrix::operator*(const Matrix& other) const
+{
+    assert(m_iColumns == other.GetRows());
+
+    int i = 0, j = 0, k = 0;
+    Matrix result(m_iRows, other.GetColumns());
+
+    double value;
+    for(i=0;i<result.GetRows();++i)
+    {
+        for(j=0;j<other.GetColumns();++j)
+        {
+            value = 0.0;
+            for(k=0;k<m_iColumns;++k)
+            {
+                value += GetElement(i, k)*other.GetElement(k, j);
+            }
+            result.SetElement(i, j, value);
+        }
+    }
+
+    return result;
+}
+
+
+/* ===========================================================================================
+// Get data pointer of the matrix
+============================================================================================*/
+void Matrix::SetData(double* value)
+{
+    memset(m_pdData, 0, sizeof(double)*m_iColumns*m_iRows);
+    memcpy(m_pdData, value, sizeof(double)*m_iColumns*m_iRows);
+}
+
+
 /* ===========================================================================================
 // Get data pointer of the matrix
 ============================================================================================*/
@@ -201,9 +352,45 @@ double* Matrix::GetData() const
 }
 
 
+bool Matrix::SetElement(int row, int col, double value)
+{
+    if(col<0 || col>=m_iColumns || row<0 || row>=m_iRows)
+    {
+        return false;
+    }
+
+    if(m_pdData == NULL)
+    {
+        return false;
+    }
+
+    m_pdData[col+row*m_iColumns] = value;
+}
+
+
 double Matrix::GetElement(int row, int col) const
 {
-    assert(col>=0 && col<m_iColumns && row>=0 && row<m_iRows);
-    assert(m_pdData);
+    if(col<0 || col>=m_iColumns || row<0 || row>=m_iRows)
+    {
+        return false;
+    }
+
+    if(m_pdData == NULL)
+    {
+        return false;
+    }
+
     return m_pdData[col+row*m_iColumns];
+}
+
+
+int Matrix::GetColumns() const
+{
+    return m_iColumns;
+}
+
+
+int Matrix::GetRows() const
+{
+    return m_iRows;
 }

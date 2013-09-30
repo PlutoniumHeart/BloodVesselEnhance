@@ -29,6 +29,7 @@ set(SOURCES src/main.cpp src/BaseImage.h src/BaseImage.cpp
             src/JpegSeries.h src/JpegSeries.cpp
             src/StructureClassify.h src/StructureClassify.cpp
             src/Matrix.h src/Matrix.cpp
+            src/BaseFilter.h src/BaseFilter.cpp
 )
 
 set(ALL_LIBS ${ITK_LIBRARIES} ${CUDA_LIBRARIES})
