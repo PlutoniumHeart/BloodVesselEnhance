@@ -2,7 +2,7 @@
 
 
 BaseImageSeries::BaseImageSeries()
-    : m_lDepth(0)
+    //: m_lDepth(0)
 {
 }
 
@@ -12,10 +12,10 @@ BaseImageSeries::~BaseImageSeries()
 }
 
 
-unsigned long BaseImageSeries::GetImageDepth()
-{
-    return m_lDepth;
-}
+//unsigned long BaseImageSeries::GetImageDepth()
+//{
+//    return m_lDepth;
+//}
 
 
 int BaseImageSeries::CastShortToUnsignedChar(BaseImageSeries* output, int window_pos, int window_half_size)

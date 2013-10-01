@@ -15,7 +15,7 @@ public:
     ~StructureClassify();
 
     void Histogram(BaseImage* input);
-    void Histogram(BaseImageSeries* input);
+    //void Histogram(BaseImageSeries* input);
     int* GetHistogram();
 private:
     int* m_ipHist;

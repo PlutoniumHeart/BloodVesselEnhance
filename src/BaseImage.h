@@ -24,6 +24,7 @@ public:
     virtual unsigned char* GetUnsignedCharPixelData();
     unsigned long GetImageWidth();
     unsigned long GetImageHeight();
+    unsigned long GetImageDepth();
     virtual void Update() = 0;
     virtual int CastShortToUnsignedChar(BaseImage* output, int window_pos, int window_half_size);
     virtual int CastUnsignedCharToShort(BaseImage* output);
@@ -36,6 +37,7 @@ protected:
 protected:
     unsigned long m_lWidth;
     unsigned long m_lHeight;
+    unsigned long m_lDepth;
     short* m_sPixelData;
     unsigned char* m_cPixelData;
 };

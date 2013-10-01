@@ -30,6 +30,7 @@ set(SOURCES src/main.cpp src/BaseImage.h src/BaseImage.cpp
             src/StructureClassify.h src/StructureClassify.cpp
             src/Matrix.h src/Matrix.cpp
             src/BaseFilter.h src/BaseFilter.cpp
+            src/RecursiveGaussian.h src/RecursiveGaussian.cpp
 )
 
 set(ALL_LIBS ${ITK_LIBRARIES} ${CUDA_LIBRARIES})

@@ -21,7 +21,7 @@ public:
     BaseImageSeries();
     virtual ~BaseImageSeries();
 
-    unsigned long GetImageDepth();
+    //unsigned long GetImageDepth();
     virtual int CastShortToUnsignedChar(BaseImageSeries* output, int window_pos, int window_half_size);
     virtual int CastUnsignedCharToShort(BaseImageSeries* output);
 protected:
@@ -30,8 +30,6 @@ protected:
 
     template<typename T1, typename T2, typename T3> 
     int Reshape123(T2* input, T1 destination);
-protected:
-    unsigned long m_lDepth;
 };
 
 template<typename T1, typename T2, typename T3>

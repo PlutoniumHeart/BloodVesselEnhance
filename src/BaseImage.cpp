@@ -2,8 +2,9 @@
 
 
 BaseImage::BaseImage()
-    : m_lWidth(0)
-    , m_lHeight(0)
+    : m_lWidth(1)
+    , m_lHeight(1)
+    , m_lDepth(1)
     , m_sPixelData(NULL)
     , m_cPixelData(NULL)
 {
@@ -44,6 +45,12 @@ unsigned long BaseImage::GetImageWidth()
 unsigned long BaseImage::GetImageHeight()
 {
     return m_lHeight;
+}
+
+
+unsigned long BaseImage::GetImageDepth()
+{
+    return m_lDepth;
 }
 
 

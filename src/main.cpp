@@ -8,6 +8,7 @@
 #include "PngSeries.h"
 #include "DicomSeries.h"
 #include "StructureClassify.h"
+#include "RecursiveGaussian.h"
 
 
 int main()
@@ -65,9 +66,10 @@ int main()
     std::fstream file;
     JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
     StructureClassify* pStructureClassify = new StructureClassify();
+    RecursiveGaussian* pFilter = new RecursiveGaussian;
 
-    pStructureClassify->Histogram(pJpegSeries);
-    /*file.open("../data/output/histogram.txt", std::ios::out);
+    /*pStructureClassify->Histogram(pJpegSeries);
+    file.open("../data/output/histogram.txt", std::ios::out);
     if(file.is_open())
     {
         for(int i=0;i<UCHAR_MAX;i++)
@@ -81,6 +83,10 @@ int main()
         return -1;
     }
     file.close();*/
+    pFilter->SetInput(pJpegSeries);
+    pFilter->Filter(0, 10, Direction::XDirection|Direction::YDirection|Direction::ZDirection);
+    pFilter->WriteToImage(pJpegSeries);
+    pJpegSeries->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
 
     delete pJpegSeries;
     delete pStructureClassify;
