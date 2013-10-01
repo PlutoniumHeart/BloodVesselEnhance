@@ -68,7 +68,7 @@ int main()
     StructureClassify* pStructureClassify = new StructureClassify();
     RecursiveGaussian* pFilter = new RecursiveGaussian;
 
-    /*pStructureClassify->Histogram(pJpegSeries);
+    pStructureClassify->Histogram(pJpegSeries);
     file.open("../data/output/histogram.txt", std::ios::out);
     if(file.is_open())
     {
@@ -82,7 +82,7 @@ int main()
         std::cerr<<"Failed to open file."<<std::endl;
         return -1;
     }
-    file.close();*/
+    file.close();
     pFilter->SetInput(pJpegSeries);
     pFilter->Filter(0, 10, Direction::XDirection|Direction::YDirection|Direction::ZDirection);
     pFilter->WriteToImage(pJpegSeries);

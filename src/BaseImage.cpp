@@ -60,7 +60,7 @@ int BaseImage::CastShortToUnsignedChar(BaseImage* output, int window_pos, int wi
 
     if(output->GetUnsignedCharPixelData() != NULL)
     {
-        for(i=0;i<m_lWidth*m_lHeight;i++)
+        for(i=0;i<m_lWidth*m_lHeight*m_lDepth;i++)
         {
             if(m_sPixelData[i]>=window_pos+window_half_size)
             {
@@ -92,7 +92,7 @@ int BaseImage::CastUnsignedCharToShort(BaseImage* output)
 
     if(output->GetShortPixelData() != NULL)
     {
-        for(i=0;i<m_lWidth*m_lHeight;i++)
+        for(i=0;i<m_lWidth*m_lHeight*m_lDepth;i++)
         {
             output->GetShortPixelData()[i] = m_cPixelData[i];
         }
