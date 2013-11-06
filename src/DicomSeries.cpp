@@ -56,7 +56,7 @@ DicomSeries::~DicomSeries()
 int DicomSeries::SetDataDirectory(std::string folderName)
 {
     short i = 0;
-    DICOMSeriesNameGeneratorType::Pointer nameGenerator = DICOMSeriesNameGeneratorType::New();
+    nameGenerator = DICOMSeriesNameGeneratorType::New();
     nameGenerator->SetUseSeriesDetails(true);
     nameGenerator->AddSeriesRestriction("0020|0012"); // Determine number of series
     nameGenerator->SetDirectory(folderName);
@@ -138,6 +138,7 @@ int DicomSeries::WriteDicomSeries(std::string folderName)
     seriesWriter->SetInput(m_ImageObject);
     seriesWriter->SetImageIO(m_pDicomIO);
 
+    nameGenerator = DICOMSeriesNameGeneratorType::New();
     nameGenerator->SetOutputDirectory(folderName);
     seriesWriter->SetFileNames(nameGenerator->GetOutputFileNames());
 
