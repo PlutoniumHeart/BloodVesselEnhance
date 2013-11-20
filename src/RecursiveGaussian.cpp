@@ -657,7 +657,8 @@ int CFilter<T1, T2>::RecursiveGaussianY(int* d_src, int* d_dest, int order, floa
 }
 
 
-template <class T1, class T2> int CFilter<T1, T2>::RecursiveGaussianZ(int* d_src, int* d_dest, int order, float sigma)
+template <class T1, class T2>
+int CFilter<T1, T2>::RecursiveGaussianZ(int* d_src, int* d_dest, int order, float sigma)
 {
     //const float nsigma = sigma < 0.5f ? 0.5f : sigma;
     float q = 0, m0 = 1.16680, m1 = 1.10783, m2 = 1.40586;

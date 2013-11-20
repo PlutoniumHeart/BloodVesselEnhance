@@ -134,8 +134,6 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
         }
     }
 
-    //secondPeak = 200;
-
 #ifdef _DEBUG
     std::cout<<"Max grey value: "<<secondPeak<<std::endl;
 #endif
@@ -165,22 +163,17 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
 #endif
 
         m_Filter->RecursiveGaussianFilter(2,0,0,m_pInput,xx,sigma);
-
         m_Filter->RecursiveGaussianFilter(0,0,2,m_pInput,zz,sigma);
-
         m_Filter->RecursiveGaussianFilter(1,0,1,m_pInput,xz,sigma);
-
         m_Filter->RecursiveGaussianFilter(0,2,0,m_pInput,yy,sigma);
-
         m_Filter->RecursiveGaussianFilter(1,1,0,m_pInput,xy,sigma);
-
         m_Filter->RecursiveGaussianFilter(0,1,1,m_pInput,yz,sigma);
 
         for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
         {
             if(m_pInput[i]>0 && m_pInput[i]>secondPeak)
             {
-                *(i_Matrix.GetData()) = xx[i];
+                *(i_Matrix.GetData()  ) = xx[i];
                 *(i_Matrix.GetData()+1) = xy[i];
                 *(i_Matrix.GetData()+2) = xz[i];
                 *(i_Matrix.GetData()+3) = xy[i];
@@ -212,28 +205,18 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
 
                 // Improved version
                 if(lamada[0]<0 && lamada[1]<0)
-                {
                     lineValue = -lamada[1]*(1-exp(-(m_pInput[i])/255.0))*sigma*sigma;
-                }
                 else
-                {
                     lineValue = 0.0;
-                }
 
                 if(j == 0)
                 {
                     if(lineValue>255.0)
-                    {
                         m_pResult[i] = 255;
-                    }
                     else if(lineValue<0.0)
-                    {
                         m_pResult[i] = 0;
-                    }
                     else
-                    {
                         m_pResult[i] = lineValue;
-                    }
                 }
                 else
                 {
@@ -241,17 +224,11 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
                     if(tempValue<lineValue)
                     {
                         if(lineValue>255.0)
-                        {
                             m_pResult[i] = 255;
-                        }
                         else if(lineValue<0.0)
-                        {
                             m_pResult[i] = 0;
-                        }
                         else
-                        {
                             m_pResult[i] = lineValue;
-                        }
                     }
                 }
             }
