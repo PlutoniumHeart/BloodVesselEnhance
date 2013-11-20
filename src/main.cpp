@@ -1,4 +1,4 @@
-//#include <chrono>
+#include <ctime>
 #include <fstream>
 
 #include "DicomSlice.h"
@@ -11,18 +11,37 @@
 #include "RecursiveGaussian.h"
 
 
+timespec diff(timespec start, timespec end)
+{
+    timespec temp;
+    if((end.tv_nsec-start.tv_nsec)<0)
+    {
+        temp.tv_sec = end.tv_sec-start.tv_sec-1;
+        temp.tv_nsec = 1000000000+end.tv_nsec-start.tv_nsec;
+    }
+    else
+    {
+        temp.tv_sec = end.tv_sec-start.tv_sec;
+        temp.tv_nsec = end.tv_nsec-start.tv_nsec;
+    }
+    return temp;
+}
+
+
 int main()
 {
     std::fstream file;
+    timespec time1, time2;
+    
     JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
     DicomSeries* pDicomResult = new DicomSeries(pJpegSeries->GetImageWidth(), pJpegSeries->GetImageHeight(), pJpegSeries->GetImageDepth());
 
     StructureClassify* pStructureClassify = new StructureClassify();
     pStructureClassify->SetInput(pJpegSeries);
 
-    //auto begin = std::chrono::high_resolution_clock::now();
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time1);
     pStructureClassify->ClassifyBrightTube(5, 80, 2);
-    //auto end = std::chrono::high_resolution_clock::now();
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &time2);
 
     unsigned char *p = pStructureClassify->GetResult();
     short* pp = pDicomResult->GetShortPixelData();
@@ -31,19 +50,9 @@ int main()
         pp[i] = p[i];
     }
 
-    /*int max = 0;
-    for(int i=0;i<pJpegSeries->GetImageWidth()*pJpegSeries->GetImageHeight()*pJpegSeries->GetImageDepth();i++)
-    {
-        if(pp[i]>max)
-        {
-            max = pp[i];
-        }
-    }*/
-
     pDicomResult->Update();
 
-    //auto ticks = std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count();
-    //std::cout<<"Cast operation took "<<ticks<<" micro seconds."<<std::endl;
+    std::cout<<"Operation took: "<<diff(time1, time2).tv_sec<<"."<<diff(time1, time2).tv_nsec<<"s"<<std::endl;
     pDicomResult->WriteDicomSeries("../data/output/Dicom_out/", "%03d.IMG", 85, 325);
 
     delete pJpegSeries;

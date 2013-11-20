@@ -124,18 +124,17 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
     int secondPeak = 1;
 
     m_pResult = new unsigned char[m_iWidth*m_iHeight*m_iDepth];
-    //m_pTemp = new short[m_iWidth*m_iHeight*m_iDepth];
     m_pOutput = new unsigned char[m_iWidth*m_iHeight*m_iDepth];
 
-    /*for(i=1;i<255;i++)
+    for(i=1;i<255;i++)
     {
         if(m_ipHist[i]>m_ipHist[secondPeak])
         {
             secondPeak = i;
         }
-    }*/
+    }
 
-    secondPeak = 200;
+    //secondPeak = 200;
 
 #ifdef _DEBUG
     std::cout<<"Max grey value: "<<secondPeak<<std::endl;
@@ -176,16 +175,6 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
         m_Filter->RecursiveGaussianFilter(1,1,0,m_pInput,xy,sigma);
 
         m_Filter->RecursiveGaussianFilter(0,1,1,m_pInput,yz,sigma);
-
-//#ifdef _DEBUG
-//        for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
-//		{
-//			if(yy[i] != 0)
-//			{
-//				std::cout<<yy[i]<<std::endl;
-//			}
-//		}
-//#endif
 
         for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
         {
@@ -279,38 +268,6 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
     delete [] xy;
     delete [] xz;
     delete [] yz;
-
-    /*float max = 0.0, min = 999999.0;
-    for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
-    {
-        if(m_pResult[i]>max)
-        {
-            max = m_pResult[i];
-        }
-        if(m_pResult[i]<min)
-        {
-            min = m_pResult[i];
-        }
-    }*/
-
-    //for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
-    //{
-    //    //m_pOutput[i] = (m_pResult[i]+abs(min))/(max-min)*255;
-
-    //    /*if(m_pResult>0)
-    //    {
-    //        m_pOutput[i] = m_pResult[i]*15;
-    //    }
-    //    else
-    //    {
-    //        m_pOutput[i] = 0;
-    //    }*/
-
-    //    if(m_pResult[i]<0)
-    //        m_pOutput[i] = 0;
-    //    else
-    //        m_pOutput[i] = m_pResult[i]*20;
-    //}
 
     return 0;
 }
