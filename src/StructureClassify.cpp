@@ -159,7 +159,7 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
 
     for(j=0;j<iterations;j++)
     {
-        sigma = pow(r2/r1, (float)j/(iterations-1))*r1/4;
+        sigma = pow(r2/r1, (float)j/(iterations-1))*r1/4.0;
 
 #ifdef _DEBUG
         std::cout<<"Sigma: "<<sigma<<std::endl;
@@ -167,15 +167,15 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
 
         m_Filter->RecursiveGaussianFilter(2,0,0,m_pInput,xx,sigma);
 
-		m_Filter->RecursiveGaussianFilter(0,0,2,m_pInput,zz,sigma);
+        m_Filter->RecursiveGaussianFilter(0,0,2,m_pInput,zz,sigma);
 
-		m_Filter->RecursiveGaussianFilter(1,0,1,m_pInput,xz,sigma);
+        m_Filter->RecursiveGaussianFilter(1,0,1,m_pInput,xz,sigma);
 
-		m_Filter->RecursiveGaussianFilter(0,2,0,m_pInput,yy,sigma);
+        m_Filter->RecursiveGaussianFilter(0,2,0,m_pInput,yy,sigma);
 
-		m_Filter->RecursiveGaussianFilter(1,1,0,m_pInput,xy,sigma);
+        m_Filter->RecursiveGaussianFilter(1,1,0,m_pInput,xy,sigma);
 
-		m_Filter->RecursiveGaussianFilter(0,1,1,m_pInput,yz,sigma);
+        m_Filter->RecursiveGaussianFilter(0,1,1,m_pInput,yz,sigma);
 
 //#ifdef _DEBUG
 //        for(i=0;i<m_iWidth*m_iHeight*m_iDepth;i++)
@@ -249,7 +249,7 @@ int StructureClassify::ClassifyBrightTube(int iterations, float rMax, float rMin
                 else
                 {
                     tempValue = m_pResult[i];
-                    if(tempValue>255.0)
+                    if(tempValue<lineValue)
                     {
                         if(lineValue>255.0)
                         {
