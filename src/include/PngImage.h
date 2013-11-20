@@ -31,4 +31,4 @@ protected:
 };
 
 
-#endif // !PNGIMAGE_H
+#endif // PNGIMAGE_H

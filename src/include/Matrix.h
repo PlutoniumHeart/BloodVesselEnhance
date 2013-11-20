@@ -40,4 +40,4 @@ protected:
 };
 
 
-#endif // !MATRIX_H
+#endif // MATRIX_H

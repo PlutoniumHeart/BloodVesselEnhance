@@ -31,4 +31,4 @@ protected:
 
 
 
-#endif // !PNGSERIES_H
+#endif // PNGSERIES_H

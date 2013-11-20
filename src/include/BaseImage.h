@@ -1,5 +1,5 @@
-#ifndef IMAGEIO_H
-#define IMAGEIO_H
+#ifndef BASEIMAGE_H
+#define BASEIMAGE_H
 
 
 #include <itkImage.h>
@@ -71,4 +71,4 @@ int BaseImage::Reshape122(T2* input, T1 destination)
 }
 
 
-#endif // !BASEIMAGEIO_H
+#endif // BASEIMAGEIO_H

@@ -30,4 +30,4 @@ protected:
 };
 
 
-#endif // !JPEGSERIES_H
+#endif // JPEGSERIES_H

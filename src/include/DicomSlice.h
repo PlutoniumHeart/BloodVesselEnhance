@@ -35,4 +35,4 @@ protected:
 };
 
 
-#endif // !DICOM2DIO_H
+#endif // DICOM2DIO_H

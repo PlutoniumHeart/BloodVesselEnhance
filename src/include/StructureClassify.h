@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif // !STRUCTURECLASSIFY_H
+#endif // STRUCTURECLASSIFY_H

@@ -40,4 +40,4 @@ private:
 };
 
 
-#endif // !DICOMSERIES_H
+#endif // DICOMSERIES_H

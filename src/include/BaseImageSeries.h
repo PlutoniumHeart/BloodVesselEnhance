@@ -57,4 +57,4 @@ int BaseImageSeries::Reshape123(T2* input, T1 destination)
 }
 
 
-#endif // !BASEIMAGESERIES_H
+#endif // BASEIMAGESERIES_H
