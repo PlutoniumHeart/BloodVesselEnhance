@@ -15,7 +15,7 @@ int main()
 {
     std::fstream file;
     JpegSeries* pJpegSeries = new JpegSeries("../data/SegmentedLiver/", "%03d.jpg", 85, 325);
-    JpegSeries* pResult = new JpegSeries(pJpegSeries->GetImageWidth(), pJpegSeries->GetImageHeight(), pJpegSeries->GetImageDepth());
+    DicomSeries* pDicomResult = new DicomSeries(pJpegSeries->GetImageWidth(), pJpegSeries->GetImageHeight(), pJpegSeries->GetImageDepth());
 
     StructureClassify* pStructureClassify = new StructureClassify();
     pStructureClassify->SetInput(pJpegSeries);
@@ -25,7 +25,7 @@ int main()
     //auto end = std::chrono::high_resolution_clock::now();
 
     unsigned char *p = pStructureClassify->GetResult();
-    unsigned char *pp = pResult->GetUnsignedCharPixelData();
+    short* pp = pDicomResult->GetShortPixelData();
     for(int i=0;i<pJpegSeries->GetImageWidth()*pJpegSeries->GetImageHeight()*pJpegSeries->GetImageDepth();i++)
     {
         pp[i] = p[i];
@@ -40,11 +40,11 @@ int main()
         }
     }*/
 
-    pResult->Update();
+    pDicomResult->Update();
 
     //auto ticks = std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count();
     //std::cout<<"Cast operation took "<<ticks<<" micro seconds."<<std::endl;
-    pResult->WriteJpegSeries("../data/output/3Djpeg/", "%03d.jpg", 85, 325);
+    pDicomResult->WriteDicomSeries("../data/output/Dicom_out/", "%03d.IMG", 85, 325);
 
     delete pJpegSeries;
     delete pStructureClassify;

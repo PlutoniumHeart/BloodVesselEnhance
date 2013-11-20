@@ -25,7 +25,7 @@ public:
 
     virtual void Update();
     int ReadDicomSeries(std::string folderName, std::string seriesUID);
-    int WriteDicomSeries(std::string folderName);
+    int WriteDicomSeries(std::string folderName, std::string seriesFormat, int begin, int end);
 protected:
     DICOMIOType::Pointer m_pDicomIO;
     DICOMSeriesType::Pointer m_ImageObject;

@@ -131,16 +131,20 @@ int DicomSeries::ReadDicomSeries(std::string folderName, std::string seriesName)
 }
 
 
-int DicomSeries::WriteDicomSeries(std::string folderName)
+int DicomSeries::WriteDicomSeries(std::string folderName, std::string seriesFormat, int begin, int end)
 {
     DICOMSeriesWriteType::Pointer seriesWriter = DICOMSeriesWriteType::New();
 
     seriesWriter->SetInput(m_ImageObject);
     seriesWriter->SetImageIO(m_pDicomIO);
 
-    nameGenerator = DICOMSeriesNameGeneratorType::New();
-    nameGenerator->SetOutputDirectory(folderName);
-    seriesWriter->SetFileNames(nameGenerator->GetOutputFileNames());
+    SeriesNameGeneratorType::Pointer nameGenerator = SeriesNameGeneratorType::New();
+    nameGenerator->SetSeriesFormat(folderName+seriesFormat);
+    nameGenerator->SetStartIndex(begin);
+    nameGenerator->SetEndIndex(end);
+    nameGenerator->SetIncrementIndex(1);
+//  nameGenerator->SetOutputDirectory(folderName);
+    seriesWriter->SetFileNames(nameGenerator->GetFileNames());
 
     try
     {
