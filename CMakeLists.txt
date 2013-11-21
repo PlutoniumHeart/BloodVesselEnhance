@@ -39,6 +39,7 @@ set(SOURCES src/main.cpp src/include/BaseImage.h src/BaseImage.cpp
             src/include/RecursiveGaussian.h src/RecursiveGaussian.cpp
             src/include/GPUMemOps.cuh src/GPUMemOps.cu
             src/cudaRecursiveGaussian_kernel.cu
+			src/Util.h
 )
 
 set(ALL_LIBS ${ITK_LIBRARIES} ${CUDA_LIBRARIES})

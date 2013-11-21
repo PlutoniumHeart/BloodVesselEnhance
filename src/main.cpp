@@ -1,4 +1,3 @@
-#include <ctime>
 #include <fstream>
 
 #include "DicomSlice.h"
@@ -9,23 +8,7 @@
 #include "DicomSeries.h"
 #include "StructureClassify.h"
 #include "RecursiveGaussian.h"
-
-
-timespec diff(timespec start, timespec end)
-{
-    timespec temp;
-    if((end.tv_nsec-start.tv_nsec)<0)
-    {
-        temp.tv_sec = end.tv_sec-start.tv_sec-1;
-        temp.tv_nsec = 1000000000+end.tv_nsec-start.tv_nsec;
-    }
-    else
-    {
-        temp.tv_sec = end.tv_sec-start.tv_sec;
-        temp.tv_nsec = end.tv_nsec-start.tv_nsec;
-    }
-    return temp;
-}
+#include "Util.h"
 
 
 int main()
@@ -51,8 +34,11 @@ int main()
     }
 
     pDicomResult->Update();
-
+#ifdef _MSC_VER
+    std::cout<<"Operation took: "<<diff(time1, time2).tv_sec<<"."<<diff(time1, time2).tv_usec<<"s"<<std::endl;
+#else
     std::cout<<"Operation took: "<<diff(time1, time2).tv_sec<<"."<<diff(time1, time2).tv_nsec<<"s"<<std::endl;
+#endif
     pDicomResult->WriteDicomSeries("../data/output/Dicom_out/", "%03d.IMG", 85, 325);
 
     delete pJpegSeries;
